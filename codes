@@ -1,0 +1,1609 @@
+code 1 | Experiment 1
+#include <stdio.h> // Includes the standard input-output library
+
+// Function for Linear Search
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {    // Loop through each element in the array
+        if (arr[i] == target) {       // Check if the current element matches the target
+            return i;                 // If yes, return the index where it was found
+        }
+    }
+    return -1;                        // If not found, return -1
+}
+
+// Function for Binary Search
+int binarySearch(int arr[], int n, int target) {
+    int left = 0;                     // Starting index of the array
+    int right = n - 1;                // Ending index of the array
+
+    while (left <= right) {           // Repeat while the search range is valid
+        int mid = left + (right - left) / 2; // Find the middle element
+
+        if (arr[mid] == target) {      // Check if the middle element is the target
+            return mid;                // If yes, return its index
+        }
+        if (arr[mid] < target) {       // If the target is greater than the middle
+            left = mid + 1;            // Move the left boundary up
+        } else {                       // If the target is less than the middle
+            right = mid - 1;           // Move the right boundary down
+        }
+    }
+    return -1;                         // If not found, return -1
+}
+
+int main() {
+    int arr[] = {2, 4, 6, 8, 10, 12, 14, 16, 18, 20}; // Array to search
+    int n = sizeof(arr) / sizeof(arr[0]);             // Calculate array size
+    int target, choice;
+
+    printf("Enter the element to search: ");
+    scanf("%d", &target);                             // Get the target element from the user
+
+    printf("Choose the search technique:\n1. Linear Search\n2. Binary Search\n");
+    scanf("%d", &choice);                             // Get the search method choice
+
+    int result;
+    if (choice == 1) {
+        result = linearSearch(arr, n, target);        // Call linear search if choice is 1
+    } else if (choice == 2) {
+        result = binarySearch(arr, n, target);        // Call binary search if choice is 2
+    } else {
+        printf("Invalid choice!\n");                  // Print error for invalid choice
+        return 0;                                     // End program if invalid choice
+    }
+
+    if (result != -1) {
+        printf("Element found at index %d.\n", result); // Print index if found
+    } else {
+        printf("Element not found in the array.\n");    // Print not found message
+    }
+
+    return 0;
+}
+
+expt 2 
+#include <stdio.h>
+
+// Function to perform Bubble Sort
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {            // Loop through each element
+        for (int j = 0; j < n - i - 1; j++) {    // Compare elements up to the unsorted portion
+            if (arr[j] > arr[j + 1]) {           // Swap if the current element is greater
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    // Perform Bubble Sort
+    bubbleSort(arr, n);
+    printf("Sorted array after Bubble Sort: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+#include <stdio.h>
+
+// Function to perform Selection Sort
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {            // Loop through each element
+        int minIdx = i;                          // Assume the current element is the minimum
+        for (int j = i + 1; j < n; j++) {        // Find the minimum in the remaining elements
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;                      // Update minimum index
+            }
+        }
+        if (minIdx != i) {                       // Swap if a new minimum is found
+            int temp = arr[i];
+            arr[i] = arr[minIdx];
+            arr[minIdx] = temp;
+        }
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    // Perform Selection Sort
+    selectionSort(arr, n);
+    printf("Sorted array after Selection Sort: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+expt 3 
+Bubble Sort and Insertion Sort
+#include <stdio.h>
+
+// Function to perform Bubble Sort
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {            // Outer loop for passes
+        for (int j = 0; j < n - i - 1; j++) {    // Inner loop for comparison
+            if (arr[j] > arr[j + 1]) {           // If elements are in the wrong order, swap
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    // Perform Bubble Sort
+    bubbleSort(arr, n);
+    printf("Sorted array after Bubble Sort: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+_________________________________________________________
+#include <stdio.h>
+
+// Function to perform Insertion Sort
+void insertionSort(int arr[], int n) {
+    for (int i = 1; i < n; i++) {               // Start from the second element
+        int key = arr[i];                        // The element to be inserted into sorted portion
+        int j = i - 1;
+
+        // Move elements of arr[0..i-1] that are greater than key
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];                // Shift elements to the right
+            j = j - 1;
+        }
+        arr[j + 1] = key;                        // Insert the key at the correct position
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    // Perform Insertion Sort
+    insertionSort(arr, n);
+    printf("Sorted array after Insertion Sort: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+
+EXPT 4
+  Merge sort
+#include <stdio.h>
+
+// Function to merge two subarrays
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    // Create temporary arrays
+    int L[n1], R[n2];
+
+    // Copy data to temporary arrays L[] and R[]
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
+
+    // Merge the temporary arrays back into arr[left..right]
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    // Copy remaining elements of L[], if any
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+
+    // Copy remaining elements of R[], if any
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+// Function to perform Merge Sort
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        // Recursively divide the array into two halves
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        // Merge the sorted halves
+        merge(arr, left, mid, right);
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    // Perform Merge Sort
+    mergeSort(arr, 0, n - 1);
+    printf("Sorted array after Merge Sort: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+Quick Sort
+#include <stdio.h>
+
+// Function to partition the array
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high]; // Pivot element
+    int i = low - 1; // Index of smaller element
+
+    // Rearrange elements based on pivot
+    for (int j = low; j < high; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            // Swap arr[i] and arr[j]
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+    
+    // Swap arr[i + 1] and arr[high] (pivot)
+    int temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+    
+    return (i + 1);
+}
+
+// Function to perform Quick Sort
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high); // Get pivot index
+
+        // Recursively sort the two subarrays
+        quickSort(arr, low, pi - 1); // Before pivot
+        quickSort(arr, pi + 1, high); // After pivot
+    }
+}
+
+// Function to print an array
+void printArray(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+    printf("Enter %d elements: ", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    printf("Original array: ");
+    printArray(arr, n);
+
+    // Perform Quick Sort
+    quickSort(arr, 0, n - 1);
+    printf("Sorted array after Quick Sort: ");
+    printArray(arr, n);
+
+    return 0;
+}
+
+
+
+
+EXPT 5
+  Menu Driven Insert begin delete display
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the node structure
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+// Head pointer of the linked list
+struct Node *head = NULL;
+
+// Function to create a new node and append it to the linked list
+void createNode(int value) {
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    
+    if (head == NULL) {
+        head = newNode;
+    } else {
+        struct Node *temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    printf("Node created with value %d\n", value);
+}
+
+// Function to insert a node at the beginning of the linked list
+void insertNode(int value) {
+    struct Node *newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+    printf("Node inserted with value %d at the beginning\n", value);
+}
+
+// Function to delete a node with a given value
+void deleteNode(int value) {
+    struct Node *temp = head, *prev = NULL;
+
+    if (temp != NULL && temp->data == value) {
+        head = temp->next;
+        free(temp);
+        printf("Node with value %d deleted\n", value);
+        return;
+    }
+
+    while (temp != NULL && temp->data != value) {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Value %d not found in the list\n", value);
+        return;
+    }
+
+    prev->next = temp->next;
+    free(temp);
+    printf("Node with value %d deleted\n", value);
+}
+
+// Function to display the linked list
+void displayList() {
+    struct Node *temp = head;
+    if (temp == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    printf("Linked List: ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+// Main function to drive the menu
+int main() {
+    int choice, value;
+    while (1) {
+        printf("\nMenu:\n");
+        printf("1. Create Node\n");
+        printf("2. Insert Node at Beginning\n");
+        printf("3. Delete Node\n");
+        printf("4. Display List\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to create node: ");
+                scanf("%d", &value);
+                createNode(value);
+                break;
+            case 2:
+                printf("Enter value to insert at beginning: ");
+                scanf("%d", &value);
+                insertNode(value);
+                break;
+            case 3:
+                printf("Enter value to delete: ");
+                scanf("%d", &value);
+                deleteNode(value);
+                break;
+            case 4:
+                displayList();
+                break;
+            case 5:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}
+
+
+
+EXPT 6
+  two lists
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (!newNode) {
+        printf("Memory error\n");
+        return NULL;
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to insert a node at the end
+void insertEnd(struct Node** head, int data) {
+    struct Node* newNode = createNode(data);
+    if (!*head) {
+        *head = newNode;
+        return;
+    }
+    struct Node* temp = *head;
+    while (temp->next) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
+
+// Function to display the list
+void displayList(struct Node* head) {
+    if (!head) {
+        printf("List is empty\n");
+        return;
+    }
+    struct Node* temp = head;
+    printf("List elements: ");
+    while (temp) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+// Function to concatenate two lists
+void concatenate(struct Node** head1, struct Node** head2) {
+    if (!*head1) {
+        *head1 = *head2;
+        return;
+    }
+    struct Node* temp = *head1;
+    while (temp->next) {
+        temp = temp->next;
+    }
+    temp->next = *head2;
+}
+
+// Function to create a new list
+void createList(struct Node** head) {
+    int n, data;
+    printf("Enter the number of elements in the list: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        printf("Enter element %d: ", i + 1);
+        scanf("%d", &data);
+        insertEnd(head, data);
+    }
+}
+
+int main() {
+    struct Node *list1 = NULL, *list2 = NULL;
+    int choice, data;
+
+    while (1) {
+        printf("\nMenu:\n");
+        printf("1. Create List 1\n");
+        printf("2. Create List 2\n");
+        printf("3. Insert into List 1\n");
+        printf("4. Insert into List 2\n");
+        printf("5. Concatenate List 2 to List 1\n");
+        printf("6. Display List 1\n");
+        printf("7. Display List 2\n");
+        printf("8. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                createList(&list1);
+                break;
+            case 2:
+                createList(&list2);
+                break;
+            case 3:
+                printf("Enter the element to insert in List 1: ");
+                scanf("%d", &data);
+                insertEnd(&list1, data);
+                break;
+            case 4:
+                printf("Enter the element to insert in List 2: ");
+                scanf("%d", &data);
+                insertEnd(&list2, data);
+                break;
+            case 5:
+                concatenate(&list1, &list2);
+                printf("List 2 concatenated to List 1.\n");
+                break;
+            case 6:
+                displayList(list1);
+                break;
+            case 7:
+                displayList(list2);
+                break;
+            case 8:
+                exit(0);
+            default:
+                printf("Invalid choice, please try again.\n");
+        }
+    }
+    return 0;
+}
+
+
+EXPT 7
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure for the doubly linked list node
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+// Function prototypes
+void createList(struct Node** head, int data);
+void insertNode(struct Node** head, int data, int position);
+void deleteNode(struct Node** head, int position);
+void displayList(struct Node* head);
+
+int main() {
+    struct Node* head = NULL;
+    int choice, data, position;
+
+    while (1) {
+        printf("\n--- Doubly Linked List Operations ---\n");
+        printf("1. Create List\n");
+        printf("2. Insert Node\n");
+        printf("3. Delete Node\n");
+        printf("4. Display List\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the data for the new node: ");
+                scanf("%d", &data);
+                createList(&head, data);
+                break;
+            case 2:
+                printf("Enter the data for the new node: ");
+                scanf("%d", &data);
+                printf("Enter the position to insert (1 for beginning, 0 for end): ");
+                scanf("%d", &position);
+                insertNode(&head, data, position);
+                break;
+            case 3:
+                printf("Enter the position to delete (1 for beginning, 0 for end): ");
+                scanf("%d", &position);
+                deleteNode(&head, position);
+                break;
+            case 4:
+                displayList(head);
+                break;
+            case 5:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}
+
+// Function to create a list with a single node
+void createList(struct Node** head, int data) {
+    if (*head != NULL) {
+        printf("List already created!\n");
+        return;
+    }
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    *head = newNode;
+    printf("List created with data %d\n", data);
+}
+
+// Function to insert a node at a specific position
+void insertNode(struct Node** head, int data, int position) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        printf("Node inserted as the first element.\n");
+        return;
+    }
+
+    if (position == 1) {
+        newNode->next = *head;
+        (*head)->prev = newNode;
+        *head = newNode;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->prev = temp;
+    }
+    printf("Node with data %d inserted.\n", data);
+}
+
+// Function to delete a node at a specific position
+void deleteNode(struct Node** head, int position) {
+    if (*head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    struct Node* temp = *head;
+    if (position == 1) {
+        *head = temp->next;
+        if (*head != NULL) {
+            (*head)->prev = NULL;
+        }
+        free(temp);
+        printf("Node deleted from beginning.\n");
+    } else {
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        if (temp->prev != NULL) {
+            temp->prev->next = NULL;
+        }
+        free(temp);
+        printf("Node deleted from end.\n");
+    }
+}
+
+// Function to display the doubly linked list
+void displayList(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    struct Node* temp = head;
+    printf("List elements: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+
+
+EXPT 8
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure for a doubly linked list node
+struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+};
+
+// Function prototypes
+void createList(struct Node** head, int data);
+void insertNode(struct Node** head, int data);
+void displayList(struct Node* head);
+void displayListReverse(struct Node* head);
+
+int main() {
+    struct Node* head = NULL;
+    int choice, data;
+
+    while (1) {
+        printf("\n--- Doubly Linked List Operations ---\n");
+        printf("1. Create List\n");
+        printf("2. Insert Node\n");
+        printf("3. Display List in Straight Order\n");
+        printf("4. Display List in Reverse Order\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter the data for the new node: ");
+                scanf("%d", &data);
+                createList(&head, data);
+                break;
+            case 2:
+                printf("Enter the data for the new node: ");
+                scanf("%d", &data);
+                insertNode(&head, data);
+                break;
+            case 3:
+                displayList(head);
+                break;
+            case 4:
+                displayListReverse(head);
+                break;
+            case 5:
+                printf("Exiting...\n");
+                exit(0);
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
+    return 0;
+}
+
+// Function to create a list with a single node
+void createList(struct Node** head, int data) {
+    if (*head != NULL) {
+        printf("List already created!\n");
+        return;
+    }
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->prev = NULL;
+    newNode->next = NULL;
+    *head = newNode;
+    printf("List created with data %d\n", data);
+}
+
+// Function to insert a node at the end of the list
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        newNode->prev = NULL;
+        *head = newNode;
+        printf("Node with data %d inserted as the first element.\n", data);
+        return;
+    }
+
+    struct Node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    newNode->prev = temp;
+    printf("Node with data %d inserted at the end.\n", data);
+}
+
+// Function to display the list in straight order
+void displayList(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+    struct Node* temp = head;
+    printf("List in straight order: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    printf("\n");
+}
+
+// Function to display the list in reverse order
+void displayListReverse(struct Node* head) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    // Move to the end of the list
+    struct Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+
+    // Display list from the end to the beginning
+    printf("List in reverse order: ");
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->prev;
+    }
+    printf("\n");
+}
+
+
+
+
+EXPT 9
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define a node in the binary search tree
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a node in the binary search tree
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+// Inorder traversal (left, root, right)
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+// Preorder traversal (root, left, right)
+void preorder(struct Node* root) {
+    if (root != NULL) {
+        printf("%d ", root->data);
+        preorder(root->left);
+        preorder(root->right);
+    }
+}
+
+// Postorder traversal (left, right, root)
+void postorder(struct Node* root) {
+    if (root != NULL) {
+        postorder(root->left);
+        postorder(root->right);
+        printf("%d ", root->data);
+    }
+}
+
+// Main function
+int main() {
+    struct Node* root = NULL;
+    int choice, value;
+
+    printf("Binary Search Tree Operations:\n");
+    while (1) {
+        printf("\n1. Insert\n2. Inorder Traversal\n3. Preorder Traversal\n4. Postorder Traversal\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                root = insert(root, value);
+                break;
+            case 2:
+                printf("Inorder Traversal: ");
+                inorder(root);
+                printf("\n");
+                break;
+            case 3:
+                printf("Preorder Traversal: ");
+                preorder(root);
+                printf("\n");
+                break;
+            case 4:
+                printf("Postorder Traversal: ");
+                postorder(root);
+                printf("\n");
+                break;
+            case 5:
+                exit(0);
+            default:
+                printf("Invalid choice, please try again.\n");
+        }
+    }
+    return 0;
+}
+
+
+
+EXPT 10
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define a node in the binary search tree
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a node in the binary search tree
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+// Function to search for a node in the BST
+struct Node* search(struct Node* root, int data) {
+    if (root == NULL || root->data == data)
+        return root;
+
+    if (data < root->data)
+        return search(root->left, data);
+
+    return search(root->right, data);
+}
+
+// Function to find the minimum value node in a tree
+struct Node* findMin(struct Node* node) {
+    struct Node* current = node;
+    while (current && current->left != NULL) {
+        current = current->left;
+    }
+    return current;
+}
+
+// Function to delete a node in the BST
+struct Node* deleteNode(struct Node* root, int data) {
+    if (root == NULL) return root;
+
+    // If the data to be deleted is smaller, then it is in the left subtree
+    if (data < root->data) {
+        root->left = deleteNode(root->left, data);
+    }
+    // If the data to be deleted is larger, then it is in the right subtree
+    else if (data > root->data) {
+        root->right = deleteNode(root->right, data);
+    }
+    // If data is the same as root's data, delete this node
+    else {
+        // Node with only one child or no child
+        if (root->left == NULL) {
+            struct Node* temp = root->right;
+            free(root);
+            return temp;
+        } else if (root->right == NULL) {
+            struct Node* temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        // Node with two children, get the inorder successor (smallest in the right subtree)
+        struct Node* temp = findMin(root->right);
+
+        // Copy the inorder successor's content to this node
+        root->data = temp->data;
+
+        // Delete the inorder successor
+        root->right = deleteNode(root->right, temp->data);
+    }
+    return root;
+}
+
+// Inorder traversal (left, root, right)
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+// Main function
+int main() {
+    struct Node* root = NULL;
+    int choice, value;
+
+    printf("Binary Search Tree Operations:\n");
+    while (1) {
+        printf("\n1. Insert\n2. Search\n3. Delete\n4. Inorder Traversal\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                root = insert(root, value);
+                break;
+            case 2:
+                printf("Enter value to search: ");
+                scanf("%d", &value);
+                if (search(root, value) != NULL) {
+                    printf("Element %d found in the tree.\n", value);
+                } else {
+                    printf("Element %d not found in the tree.\n", value);
+                }
+                break;
+            case 3:
+                printf("Enter value to delete: ");
+                scanf("%d", &value);
+                root = deleteNode(root, value);
+                printf("Element %d deleted from the tree if it was present.\n", value);
+                break;
+            case 4:
+                printf("Inorder Traversal: ");
+                inorder(root);
+                printf("\n");
+                break;
+            case 5:
+                exit(0);
+            default:
+                printf("Invalid choice, please try again.\n");
+        }
+    }
+    return 0;
+}
+
+
+
+EXPT 11
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define a node in the binary search tree
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert a node in the binary search tree
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+    return root;
+}
+
+// Inorder traversal (left, root, right)
+void inorder(struct Node* root) {
+    if (root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->data);
+        inorder(root->right);
+    }
+}
+
+// Function to find the smallest element in the BST
+int findMin(struct Node* root) {
+    struct Node* current = root;
+    while (current && current->left != NULL) {
+        current = current->left;
+    }
+    return current->data;
+}
+
+// Function to find the largest element in the BST
+int findMax(struct Node* root) {
+    struct Node* current = root;
+    while (current && current->right != NULL) {
+        current = current->right;
+    }
+    return current->data;
+}
+
+// Main function
+int main() {
+    struct Node* root = NULL;
+    int choice, value;
+
+    printf("Binary Search Tree Operations:\n");
+    while (1) {
+        printf("\n1. Insert\n2. Inorder Traversal\n3. Find Smallest Element\n4. Find Largest Element\n5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                root = insert(root, value);
+                break;
+            case 2:
+                printf("Inorder Traversal: ");
+                inorder(root);
+                printf("\n");
+                break;
+            case 3:
+                if (root != NULL) {
+                    printf("Smallest Element: %d\n", findMin(root));
+                } else {
+                    printf("Tree is empty.\n");
+                }
+                break;
+            case 4:
+                if (root != NULL) {
+                    printf("Largest Element: %d\n", findMax(root));
+                } else {
+                    printf("Tree is empty.\n");
+                }
+                break;
+            case 5:
+                exit(0);
+            default:
+                printf("Invalid choice, please try again.\n");
+        }
+    }
+    return 0;
+}
+
+
+EXPT 12
+#include <stdio.h>
+#include <limits.h>
+
+#define MAX_VERTICES 10  // Maximum number of vertices
+
+// Function to find the vertex with the minimum distance value from the set of vertices
+int minDistance(int dist[], int sptSet[], int V) {
+    int min = INT_MAX, min_index;
+
+    for (int v = 0; v < V; v++) {
+        if (sptSet[v] == 0 && dist[v] <= min) {
+            min = dist[v];
+            min_index = v;
+        }
+    }
+
+    return min_index;
+}
+
+// Function to print the constructed distance array
+void printSolution(int dist[], int V) {
+    printf("Vertex \t\t Distance from Source\n");
+    for (int i = 0; i < V; i++) {
+        printf("%d \t\t %d\n", i, dist[i]);
+    }
+}
+
+// Function that implements Dijkstra's algorithm for a graph
+void dijkstra(int graph[MAX_VERTICES][MAX_VERTICES], int src, int V) {
+    int dist[V];  // The output array, dist[i] holds the shortest distance from src to i
+    int sptSet[V];  // sptSet[i] will be true if vertex i is included in the shortest path tree
+
+    // Initialize all distances as INFINITE and sptSet[] as false
+    for (int i = 0; i < V; i++) {
+        dist[i] = INT_MAX;
+        sptSet[i] = 0;
+    }
+
+    // Distance from the source to itself is always 0
+    dist[src] = 0;
+
+    // Find shortest path for all vertices
+    for (int count = 0; count < V - 1; count++) {
+        // Pick the minimum distance vertex from the set of vertices not yet processed
+        int u = minDistance(dist, sptSet, V);
+
+        // Mark the picked vertex as processed
+        sptSet[u] = 1;
+
+        // Update the distance value of the adjacent vertices of the picked vertex
+        for (int v = 0; v < V; v++) {
+            // Update dist[v] if and only if the current vertex is not in sptSet, there is an edge from u to v,
+            // and the total weight of the path from src to v through u is smaller than the current value of dist[v]
+            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
+                dist[v] = dist[u] + graph[u][v];
+            }
+        }
+    }
+
+    // Print the solution
+    printSolution(dist, V);
+}
+
+int main() {
+    int V, src;
+
+    // Input number of vertices
+    printf("Enter the number of vertices: ");
+    scanf("%d", &V);
+
+    int graph[MAX_VERTICES][MAX_VERTICES];
+
+    // Input the adjacency matrix (graph)
+    printf("Enter the adjacency matrix (use 0 for no edge and non-zero for edge weight):\n");
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+
+    // Input the source vertex
+    printf("Enter the source vertex (0 to %d): ", V-1);
+    scanf("%d", &src);
+
+    // Call Dijkstra's algorithm
+    dijkstra(graph, src, V);
+
+    return 0;
+}
+
+
+EXPT 13
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 10
+
+// Function to implement Depth First Search (DFS)
+void DFS(int graph[MAX][MAX], int visited[MAX], int node, int n) {
+    printf("%d ", node);
+    visited[node] = 1;
+    
+    for (int i = 0; i < n; i++) {
+        if (graph[node][i] == 1 && !visited[i]) {
+            DFS(graph, visited, i, n);
+        }
+    }
+}
+
+// Function to implement Breadth First Search (BFS)
+void BFS(int graph[MAX][MAX], int visited[MAX], int start, int n) {
+    int queue[MAX], front = -1, rear = -1;
+    queue[++rear] = start;
+    visited[start] = 1;
+    
+    while (front < rear) {
+        int node = queue[++front];
+        printf("%d ", node);
+        
+        for (int i = 0; i < n; i++) {
+            if (graph[node][i] == 1 && !visited[i]) {
+                queue[++rear] = i;
+                visited[i] = 1;
+            }
+        }
+    }
+}
+
+int main() {
+    int graph[MAX][MAX], visited[MAX], n, choice, start;
+    
+    printf("Enter the number of vertices: ");
+    scanf("%d", &n);
+    
+    printf("Enter the adjacency matrix (0 for no edge, 1 for edge):\n");
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+
+    // Initialize visited array to 0 (not visited)
+    for (int i = 0; i < n; i++) {
+        visited[i] = 0;
+    }
+    
+    printf("Enter the starting node: ");
+    scanf("%d", &start);
+
+    printf("\n1. Perform DFS\n2. Perform BFS\nEnter your choice: ");
+    scanf("%d", &choice);
+    
+    switch (choice) {
+        case 1:
+            printf("DFS traversal starting from node %d: ", start);
+            DFS(graph, visited, start, n);
+            break;
+        case 2:
+            printf("BFS traversal starting from node %d: ", start);
+            BFS(graph, visited, start, n);
+            break;
+        default:
+            printf("Invalid choice.\n");
+            break;
+    }
+    
+    return 0;
+}
+
+
+
+EXPT 14
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define maximum number of vertices
+#define MAX_VERTICES 10
+
+// Define a structure for an adjacency list node
+struct Node {
+    int vertex;
+    struct Node* next;
+};
+
+// Define a structure for the graph
+struct Graph {
+    struct Node* adjList[MAX_VERTICES];
+    int visited[MAX_VERTICES];
+};
+
+// Function to create a new adjacency list node
+struct Node* createNode(int v) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->vertex = v;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to initialize the graph
+void initGraph(struct Graph* graph) {
+    for (int i = 0; i < MAX_VERTICES; i++) {
+        graph->adjList[i] = NULL;
+        graph->visited[i] = 0;
+    }
+}
+
+// Function to add an edge to the graph (undirected graph)
+void addEdge(struct Graph* graph, int src, int dest) {
+    struct Node* newNode = createNode(dest);
+    newNode->next = graph->adjList[src];
+    graph->adjList[src] = newNode;
+
+    newNode = createNode(src);  // For undirected graph, add edge in both directions
+    newNode->next = graph->adjList[dest];
+    graph->adjList[dest] = newNode;
+}
+
+// BFS algorithm
+void BFS(struct Graph* graph, int startVertex) {
+    int queue[MAX_VERTICES], front = 0, rear = 0;
+    graph->visited[startVertex] = 1;
+    queue[rear++] = startVertex;
+    printf("BFS traversal starting from vertex %d: ", startVertex);
+
+    while (front < rear) {
+        int currentVertex = queue[front++];
+        printf("%d ", currentVertex);
+
+        struct Node* temp = graph->adjList[currentVertex];
+        while (temp) {
+            int adjVertex = temp->vertex;
+            if (!graph->visited[adjVertex]) {
+                graph->visited[adjVertex] = 1;
+                queue[rear++] = adjVertex;
+            }
+            temp = temp->next;
+        }
+    }
+    printf("\n");
+}
+
+// DFS algorithm
+void DFS(struct Graph* graph, int vertex) {
+    graph->visited[vertex] = 1;
+    printf("%d ", vertex);
+
+    struct Node* temp = graph->adjList[vertex];
+    while (temp) {
+        int adjVertex = temp->vertex;
+        if (!graph->visited[adjVertex]) {
+            DFS(graph, adjVertex);
+        }
+        temp = temp->next;
+    }
+}
+
+int main() {
+    struct Graph graph;
+    initGraph(&graph);
+
+    // Adding edges
+    addEdge(&graph, 0, 1);
+    addEdge(&graph, 0, 2);
+    addEdge(&graph, 1, 3);
+    addEdge(&graph, 1, 4);
+    addEdge(&graph, 2, 5);
+    addEdge(&graph, 3, 6);
+    addEdge(&graph, 4, 6);
+    
+    // Perform BFS and DFS
+    // Reset the visited array before BFS and DFS to ensure they start fresh
+    printf("Enter a starting vertex for BFS: ");
+    int startVertex;
+    scanf("%d", &startVertex);
+    BFS(&graph, startVertex);
+
+    // Reset visited array for DFS
+    for (int i = 0; i < MAX_VERTICES; i++) {
+        graph.visited[i] = 0;
+    }
+
+    printf("Enter a starting vertex for DFS: ");
+    scanf("%d", &startVertex);
+    printf("DFS traversal starting from vertex %d: ", startVertex);
+    DFS(&graph, startVertex);
+    printf("\n");
+
+    return 0;
+}
+
+
